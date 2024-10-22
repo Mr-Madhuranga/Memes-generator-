@@ -13,4 +13,6 @@ use Node.js with the Express framework and image manipulation via Canvas
 🛑 𝙏𝙝𝙞𝙨 𝙞𝙣𝙨𝙩𝙖𝙡𝙡 𝙩𝙝𝙚 𝙣𝙚𝙘𝙚𝙨𝙨𝙖𝙧𝙮 𝙥𝙖𝙘𝙠𝙖𝙜𝙚𝙨 
 code : npm install express multer canvas
 
-
+🔥 𝗔𝗱𝗱𝗶𝘁𝗶𝗼𝗻𝗮𝗹 𝗳𝗲𝗮𝘁𝘂𝗿𝗲𝘀 
+💥 Image download: You can add an option for the user to download the generated meme.
+💥 Image filters: Implement additional features like filters
