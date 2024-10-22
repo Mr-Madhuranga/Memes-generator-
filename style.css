@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.meme-editor {
+    margin: 20px 0;
+}
+
+#meme-image {
+    max-width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#top-text, #bottom-text {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
+
+#generate-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+canvas {
+    display: none;
+}
