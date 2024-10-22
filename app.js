@@ -1,39 +1,47 @@
 document.getElementById('generate-btn').addEventListener('click', function() {
     const topText = document.getElementById('top-text').value;
     const bottomText = document.getElementById('bottom-text').value;
-    const canvas = document.getElementById('meme-canvas');
-    const context = canvas.getContext('2d');
-    const image = document.getElementById('meme-image');
+    const fileInput = document.getElementById('image-upload');
+    
+    // Ensure that an image is selected
+    if (!fileInput.files.length) {
+        alert('Please upload an image!');
+        return;
+    }
 
-    // Set canvas dimensions to match the image
-    canvas.width = image.width;
-    canvas.height = image.height;
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const formData = new FormData();
+    formData.append('topText', topText);
+    formData.append('bottomText', bottomText);
+    formData.append('image', fileInput.files[0]);
 
-    // Set text style
-    context.font = '40px Impact';
-    context.fillStyle = 'white';
-    context.strokeStyle = 'black';
-    context.lineWidth = 2;
-    context.textAlign = 'center';
-
-    // Add top text
-    context.fillText(topText.toUpperCase(), canvas.width / 2, 50);
-    context.strokeText(topText.toUpperCase(), canvas.width / 2, 50);
-
-    // Add bottom text
-    context.fillText(bottomText.toUpperCase(), canvas.width / 2, canvas.height - 20);
-    context.strokeText(bottomText.toUpperCase(), canvas.width / 2, canvas.height - 20);
-
-    // Show canvas
-    canvas.style.display = 'block';
+    // Send image and text data to the server
+    fetch('/generate-meme', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Display the generated meme
+            const memeImage = document.getElementById('meme-image');
+            memeImage.src = data.url;
+            memeImage.style.display = 'block'; // Ensure it's visible
+        } else {
+            alert('Failed to generate meme. Try again!');
+        }
+    })
+    .catch(err => {
+        console.error('Error:', err);
+    });
 });
 
+// Handle image upload and display the selected image on the screen
 document.getElementById('image-upload').addEventListener('change', function(e) {
     const reader = new FileReader();
     reader.onload = function(event) {
         const imgElement = document.getElementById('meme-image');
         imgElement.src = event.target.result;
+        imgElement.style.display = 'block';  // Ensure image is visible
     };
     reader.readAsDataURL(e.target.files[0]);
 });
